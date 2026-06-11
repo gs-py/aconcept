@@ -1,11 +1,10 @@
 import { LazyMotion, MotionConfig, domAnimation } from "framer-motion";
 import { HelmetProvider } from "react-helmet-async";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter } from "react-router";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import ScrollManager from "./components/layout/ScrollManager";
-import Home from "./pages/Home";
-import Projects from "./pages/Projects";
+import AnimatedRoutes from "./components/layout/PageTransition";
 
 export default function App() {
   return (
@@ -16,10 +15,7 @@ export default function App() {
             <ScrollManager />
             <Navbar />
             <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/projects" element={<Projects />} />
-              </Routes>
+              <AnimatedRoutes />
             </main>
             <Footer />
           </BrowserRouter>
