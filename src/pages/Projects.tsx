@@ -13,10 +13,22 @@ export default function Projects() {
           name="description"
           content="The full Aconcept Studio portfolio — residential, commercial, interior, and hospitality projects across four continents."
         />
+        <link rel="canonical" href="https://aconcept.design/projects" />
         <meta property="og:title" content="Projects — Aconcept Studio" />
         <meta
           property="og:description"
           content="The full Aconcept Studio portfolio across four continents."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://aconcept.design/projects" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="Projects — Aconcept Studio" />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&h=630&q=80"
         />
       </Helmet>
 

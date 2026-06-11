@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import { Link } from "react-router";
 import { ArrowRight, Instagram, Linkedin } from "lucide-react";
+import Logo from "../shared/Logo";
 
 const COMPANY_LINKS = [
   { label: "About the Studio", to: "/#about" },
@@ -39,8 +40,8 @@ export default function Footer() {
       <div className="container-site grid gap-12 py-20 md:grid-cols-2 lg:grid-cols-5">
         {/* Brand */}
         <div className="lg:col-span-2">
-          <Link to="/" className="font-display text-3xl text-white">
-            Aconcept<span className="text-accent">.</span>
+          <Link to="/" aria-label="Aconcept Studio — home">
+            <Logo />
           </Link>
           <p className="mt-5 max-w-sm text-sm leading-relaxed">
             Designing Timeless Spaces. Creating Lasting Impressions. A luxury

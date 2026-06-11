@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router";
 import { AnimatePresence, m } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Magnetic from "../shared/Magnetic";
+import Logo from "../shared/Logo";
 import { EASE_OUT_EXPO } from "../../lib/motion";
 
 const LINKS = [
@@ -56,12 +57,8 @@ export default function Navbar() {
       </AnimatePresence>
 
       <nav className="container-site relative flex h-20 items-center justify-between">
-        <Link
-          to="/"
-          className="font-display text-2xl tracking-tight text-white"
-          aria-label="Aconcept Studio — home"
-        >
-          Aconcept<span className="text-accent">.</span>
+        <Link to="/" aria-label="Aconcept Studio — home">
+          <Logo />
         </Link>
 
         {/* Desktop links */}
@@ -72,7 +69,7 @@ export default function Navbar() {
             </Link>
           ))}
           <Magnetic>
-            <Link to="/#contact" className="btn btn-gold !px-6 !py-3">
+            <Link to="/#contact" className="btn btn-gold px-6! py-3!">
               Schedule Consultation
             </Link>
           </Magnetic>
@@ -102,9 +99,7 @@ export default function Navbar() {
             className="fixed inset-0 z-50 flex flex-col bg-primary lg:hidden"
           >
             <div className="container-site flex h-20 items-center justify-between">
-              <span className="font-display text-2xl text-white">
-                Aconcept<span className="text-accent">.</span>
-              </span>
+              <Logo />
               <m.button
                 type="button"
                 onClick={() => setMenuOpen(false)}

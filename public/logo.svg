@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" role="img" aria-label="Aconcept Studio">
+  <!-- Mark -->
+  <path d="M10 52 L26 12 L42 52" fill="none" stroke="#0F172A" stroke-width="3.5" stroke-linecap="square"/>
+  <path d="M17.5 40 L34.5 40" stroke="#C8A97E" stroke-width="3.5" stroke-linecap="square"/>
+  <!-- Wordmark -->
+  <text x="58" y="40" font-family="Playfair Display, Georgia, serif" font-size="28" fill="#0F172A">Aconcept</text>
+  <text x="192" y="40" font-family="Playfair Display, Georgia, serif" font-size="28" fill="#C8A97E">Studio</text>
+</svg>
