@@ -14,6 +14,7 @@ import {
 import Magnetic from "../shared/Magnetic";
 import { EASE_OUT_EXPO } from "../../lib/motion";
 import { IMAGES } from "../../lib/data";
+import { useMediaQuery } from "../../lib/useMediaQuery";
 
 const HEADLINE = "Architecture That Shapes Experiences";
 
@@ -30,7 +31,7 @@ function HeroCopy() {
   return (
     <m.div
       style={reduceMotion ? undefined : { opacity, y }}
-      className="relative z-10 mx-auto max-w-4xl px-6 pt-28 text-center md:pt-36"
+      className="relative z-10 mx-auto max-w-4xl px-5 pt-24 text-center md:px-6 md:pt-36"
     >
       <m.p
         initial={reduceMotion ? false : { opacity: 0, y: 24 }}
@@ -45,7 +46,9 @@ function HeroCopy() {
         {words.map((word, index) => (
           <m.span
             key={`${word}-${index}`}
-            className="inline-block"
+            className={`inline-block ${
+              index < words.length - 1 ? "mr-[0.28em]" : ""
+            }`}
             initial={reduceMotion ? false : { clipPath: "inset(0 100% 0 0)" }}
             animate={{ clipPath: "inset(0 0% 0 0)" }}
             transition={{
@@ -55,7 +58,6 @@ function HeroCopy() {
             }}
           >
             {word}
-            {index < words.length - 1 ? " " : ""}
           </m.span>
         ))}
       </h1>
@@ -64,7 +66,7 @@ function HeroCopy() {
         initial={reduceMotion ? false : { opacity: 0, y: 32 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 0.9 }}
-        className="mx-auto mt-6 max-w-xl text-lg font-light leading-relaxed text-white/70"
+        className="mx-auto mt-5 max-w-xl text-base font-light leading-relaxed text-white/70 md:mt-6 md:text-lg"
       >
         We craft residential, commercial, and hospitality environments where
         spatial intelligence meets enduring elegance.
@@ -79,11 +81,14 @@ function HeroCopy() {
             transition: { staggerChildren: 0.12, delayChildren: 1.1 },
           },
         }}
-        className="mt-9 flex flex-wrap justify-center gap-4"
+        className="mt-8 flex flex-col items-stretch gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4"
       >
         {(["projects", "consult"] as const).map((key) => (
           <m.div
             key={key}
+            className={
+              key === "consult" ? "hidden w-full sm:block sm:w-auto" : "w-full sm:w-auto"
+            }
             variants={{
               hidden: reduceMotion ? {} : { opacity: 0, y: 24 },
               visible: {
@@ -94,15 +99,21 @@ function HeroCopy() {
             }}
           >
             {key === "projects" ? (
-              <Magnetic>
-                <Link to="/projects" className="btn btn-gold">
+              <Magnetic className="block sm:inline-block">
+                <Link
+                  to="/projects"
+                  className="btn btn-gold w-full justify-center sm:w-auto"
+                >
                   Explore Projects
                   <ArrowRight size={16} />
                 </Link>
               </Magnetic>
             ) : (
-              <Magnetic>
-                <Link to="/#contact" className="btn btn-outline-light">
+              <Magnetic className="block sm:inline-block">
+                <Link
+                  to="/#contact"
+                  className="btn btn-outline-light w-full justify-center sm:w-auto"
+                >
                   Book a Consultation
                 </Link>
               </Magnetic>
@@ -121,11 +132,30 @@ function HeroCopy() {
 function ExpandingImage() {
   const { scrollYProgress } = useContainerScrollContext();
   const reduceMotion = useReducedMotion();
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
-  const insetTop = useTransform(scrollYProgress, [0, 0.75], [54, 0]);
-  const insetBottom = useTransform(scrollYProgress, [0, 0.75], [10, 0]);
-  const insetX = useTransform(scrollYProgress, [0, 0.75], [24, 0]);
-  const radius = useTransform(scrollYProgress, [0, 0.85], [24, 0]);
+  // Mobile: copy is taller and the viewport narrower — start the window
+  // lower and much wider so the image reads instead of a sliver.
+  const insetTop = useTransform(
+    scrollYProgress,
+    [0, 0.75],
+    [isMobile ? 60 : 54, 0],
+  );
+  const insetBottom = useTransform(
+    scrollYProgress,
+    [0, 0.75],
+    [isMobile ? 6 : 10, 0],
+  );
+  const insetX = useTransform(
+    scrollYProgress,
+    [0, 0.75],
+    [isMobile ? 7 : 24, 0],
+  );
+  const radius = useTransform(
+    scrollYProgress,
+    [0, 0.85],
+    [isMobile ? 14 : 24, 0],
+  );
   const clipPath = useMotionTemplate`inset(${insetTop}% ${insetX}% ${insetBottom}% ${insetX}% round ${radius}px)`;
 
   // Gentle settle from a slight zoom as the frame opens.
@@ -162,17 +192,17 @@ function ExpandingImage() {
         style={reduceMotion ? undefined : { opacity: captionOpacity, y: captionY }}
         className="absolute inset-x-0 bottom-0"
       >
-        <div className="container-site flex flex-col items-start gap-6 pb-20 text-left md:flex-row md:items-end md:justify-between md:pb-24">
+        <div className="container-site flex flex-col items-start gap-6 pb-16 text-left md:flex-row md:items-end md:justify-between md:pb-24">
           <div>
             <p className="eyebrow">Aconcept Studio</p>
-            <p className="mt-4 max-w-2xl font-display text-display-lg text-white">
+            <p className="mt-3 max-w-2xl font-display text-display-lg text-white md:mt-4">
               Designing Timeless Spaces.{" "}
               <em className="italic text-accent">
                 Creating Lasting Impressions.
               </em>
             </p>
           </div>
-          <div className="shrink-0 border-l border-accent/50 pl-5 text-sm font-light leading-relaxed text-white/70">
+          <div className="hidden shrink-0 border-l border-accent/50 pl-5 text-sm font-light leading-relaxed text-white/70 md:block">
             <p>200+ projects delivered</p>
             <p>Four continents · Twelve countries</p>
           </div>
