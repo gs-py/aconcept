@@ -104,25 +104,56 @@ export const SERVICES = [
   }
 ];
 
-export const TESTIMONIALS = [
+export interface Testimonial {
+  quote: string;
+  client: string;
+  role: string;
+  project: string;
+  location: string;
+  image: string;
+}
+
+export const TESTIMONIALS: Testimonial[] = [
   {
-    quote: "AConcept Studio transformed our vision into a timeless reality. Their attention to detail and understanding of spatial flow is unparalleled in the industry.",
-    client: "Rajeev Menon",
-    project: "The Vertex House",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=500&auto=format&fit=crop"
+    quote:
+      "AConcept Studio turned our hillside plot into a retreat that breathes. Every space frames the Wayanad landscape with such quiet intention — it feels timeless.",
+    client: "Rajesh Nair",
+    role: "Owner",
+    project: "The Holistic Retreat",
+    location: "Wayanad, Kerala",
+    image:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=500&auto=format&fit=crop",
   },
   {
-    quote: "Working with them was a seamless experience. They elevated our boutique hotel from a concept to a landmark destination that guests absolutely love.",
-    client: "Sarah Varghese",
-    project: "Aura Boutique Hotel",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=500&auto=format&fit=crop"
+    quote:
+      "From concept to handover the team treated the project as their own. The cottages sit so naturally in the terrain that guests keep asking who designed them.",
+    client: "Korome Hospitality",
+    role: "Promoters",
+    project: "Resort at Korome",
+    location: "Wayanad, Kerala",
+    image:
+      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=500&auto=format&fit=crop",
   },
   {
-    quote: "Their approach to commercial interiors completely revitalized our workspace culture. It's sophisticated, highly functional, and beautifully executed.",
-    client: "Arun Kumar",
-    project: "Lumina Workspace",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=500&auto=format&fit=crop"
-  }
+    quote:
+      "They reimagined our restaurant as an experience, not just a space. Footfall and dwell time rose noticeably within the first quarter of reopening.",
+    client: "Chettais Group",
+    role: "Owners",
+    project: "Chettais Restaurant",
+    location: "Mysuru, Karnataka",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=500&auto=format&fit=crop",
+  },
+  {
+    quote:
+      "Precise, patient and deeply creative. The restaurant, cafe and cottages all feel like one coherent world. It exceeded everything we imagined.",
+    client: "Shanty Thomas",
+    role: "Owner",
+    project: "Resort for Shanty",
+    location: "Wayanad, Kerala",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=500&auto=format&fit=crop",
+  },
 ];
 
 export const TEAM = [

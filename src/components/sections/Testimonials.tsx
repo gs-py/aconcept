@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -46,27 +45,32 @@ export const Testimonials = () => {
             }}
             loop={true}
             speed={800}
-            className="w-full"
+            className="w-full testi-swiper"
           >
             {TESTIMONIALS.map((testimonial, index) => (
               <SwiperSlide key={index} className="h-auto">
-                <div className="bg-surface p-10 md:p-14 h-full flex flex-col border border-white/5">
+                <div className="bg-surface p-10 md:p-14 h-full min-h-[26rem] flex flex-col border border-white/5">
                   <div className="text-6xl text-accent font-hero leading-none mb-6">“</div>
                   <p className="text-lg md:text-xl text-white/90 leading-relaxed mb-12 flex-grow">
                     {testimonial.quote}
                   </p>
-                  
-                  <div className="w-12 h-px bg-accent/50 mb-8" />
-                  
-                  <div className="flex items-center gap-4">
-                    <img 
-                      src={testimonial.image} 
-                      alt={testimonial.client} 
+
+                  {/* Project tag */}
+                  <span className="mb-8 w-fit bg-accent/10 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.15em] text-accent">
+                    {testimonial.project}
+                  </span>
+
+                  <div className="flex items-center gap-4 border-t border-white/5 pt-6">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.client}
                       className="w-12 h-12 rounded-full object-cover grayscale"
                     />
                     <div>
                       <h4 className="text-white font-medium mb-1">{testimonial.client}</h4>
-                      <p className="text-sm text-muted">{testimonial.project}</p>
+                      <p className="text-sm text-muted">
+                        {testimonial.role} &middot; {testimonial.location}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -80,6 +84,13 @@ export const Testimonials = () => {
       </div>
       
       <style>{`
+        /* Equal-height slides — cards stretch to the tallest in view */
+        .testi-swiper .swiper-wrapper {
+          align-items: stretch;
+        }
+        .testi-swiper .swiper-slide {
+          height: auto;
+        }
         .testi-pagination .swiper-pagination-bullet {
           width: 24px;
           height: 3px;
