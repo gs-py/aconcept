@@ -1,103 +1,88 @@
-import { m } from "framer-motion";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { PROJECTS } from "../../data/mock";
 import { Link } from "react-router";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import OptimizedImage from "../shared/OptimizedImage";
-import SectionHeading from "../shared/SectionHeading";
-import { scaleReveal, staggerContainer, viewportOnce } from "../../lib/motion";
-import { PROJECTS } from "../../lib/data";
-import type { Project } from "../../lib/data";
 
-const HOVER_EASE = "[transition-timing-function:cubic-bezier(0.25,0.46,0.45,0.94)]";
-
-function ProjectCard({ project, hero = false }: { project: Project; hero?: boolean }) {
+export const FeaturedProjects = () => {
   return (
-    <m.article
-      variants={scaleReveal}
-      className={`group relative overflow-hidden bg-secondary ${
-        hero ? "md:col-span-2" : ""
-      }`}
-    >
-      <Link to="/projects" aria-label={`View ${project.title}`}>
-        <div className={hero ? "aspect-[16/9]" : "aspect-[4/3]"}>
-          <OptimizedImage
-            src={project.image}
-            alt={`${project.title} — ${project.category.toLowerCase()} project in ${project.location}`}
-            width={project.width}
-            height={project.height}
-            className={`h-full w-full object-cover duration-[600ms] ${HOVER_EASE} group-hover:scale-[1.06]`}
-          />
-        </div>
-
-        {/* Hover overlay — always visible on touch viewports */}
-        <div
-          className={`absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/30 to-transparent transition-opacity duration-[600ms] ${HOVER_EASE} opacity-100 lg:opacity-0 lg:group-hover:opacity-100`}
-          aria-hidden
-        />
-
-        <div
-          className={`absolute inset-x-0 bottom-0 flex items-end justify-between p-6 transition-all duration-[600ms] ${HOVER_EASE} translate-y-0 opacity-100 lg:translate-y-4 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100`}
-        >
-          <div>
-            <span className="inline-block border border-accent/60 px-2.5 py-1 text-[0.65rem] font-medium uppercase tracking-[0.15em] text-accent">
-              {project.category}
-            </span>
-            <h3 className="mt-3 font-display text-2xl text-white">
-              {project.title}
-            </h3>
-            <p className="mt-1 text-sm font-light text-white/60">
-              {project.location} · {project.year}
-            </p>
-          </div>
-          <span
-            className={`flex h-11 w-11 items-center justify-center border border-white/30 text-white transition-all duration-[600ms] ${HOVER_EASE} translate-x-0 translate-y-0 lg:-translate-x-3 lg:translate-y-3 lg:group-hover:translate-x-0 lg:group-hover:translate-y-0`}
-            aria-hidden
-          >
-            <ArrowUpRight size={18} strokeWidth={1.5} />
-          </span>
-        </div>
-      </Link>
-    </m.article>
-  );
-}
-
-export default function FeaturedProjects() {
-  const featured = PROJECTS.filter((project) => project.featured).slice(0, 5);
-  const [heroProject, ...rest] = featured;
-
-  return (
-    <section className="section-pad">
+    <section className="section-pad bg-background">
       <div className="container-site">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading
-            eyebrow="Selected Work"
-            title="Featured Projects"
-            description="A cross-section of our practice — residences, workplaces, and hospitality environments built with intent."
-          />
-          <Link
-            to="/projects"
-            className="group mb-14 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-[0.12em] text-primary transition-colors hover:text-accent lg:mb-20"
-          >
+        <div className="flex justify-between items-end mb-16 md:mb-24">
+          <div>
+            <span className="eyebrow mb-6">Portfolio</span>
+            <h2 className="text-4xl md:text-6xl font-hero text-white">Selected Works</h2>
+          </div>
+          <Link to="/projects" className="hidden md:inline-flex btn btn-outline-light">
             View All Projects
-            <ArrowRight
-              size={16}
-              className="transition-transform group-hover:translate-x-1"
-            />
           </Link>
         </div>
 
-        <m.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportOnce}
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {heroProject && <ProjectCard project={heroProject} hero />}
-          {rest.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </m.div>
+        <div className="flex flex-col gap-24 md:gap-40">
+          {PROJECTS.map((project, index) => {
+            const { ref, inView } = useInView({
+              triggerOnce: true,
+              threshold: 0.1,
+            });
+
+            return (
+              <motion.div
+                ref={ref}
+                key={project.id}
+                className={`flex flex-col ${
+                  index % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"
+                } gap-8 md:gap-16 items-center`}
+                initial={{ opacity: 0, y: 50 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <Link to={`/projects/${project.id}`} className="w-full md:w-2/3 group overflow-hidden block">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface">
+                    <motion.div
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105 group-hover:blur-[2px]"
+                      style={{ backgroundImage: `url(${project.image})` }}
+                    />
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
+                      <span className="text-white text-lg tracking-widest uppercase font-medium transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                        View Project
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+
+                <div className="w-full md:w-1/3 flex flex-col justify-center">
+                  <div className="font-numbers text-accent mb-6 text-xl">{project.id}</div>
+                  <h3 className="text-3xl md:text-4xl font-hero text-white mb-4">
+                    <Link to={`/projects/${project.id}`} className="hover:text-accent transition-colors">
+                      {project.title}
+                    </Link>
+                  </h3>
+                  <div className="h-px w-full bg-white/10 my-6" />
+                  <div className="grid grid-cols-2 gap-4 text-sm text-muted">
+                    <div>
+                      <span className="block text-white/50 mb-1">Location</span>
+                      <span className="text-white">{project.location}</span>
+                    </div>
+                    <div>
+                      <span className="block text-white/50 mb-1">Category</span>
+                      <span className="text-white">{project.category}</span>
+                    </div>
+                    <div>
+                      <span className="block text-white/50 mb-1">Year</span>
+                      <span className="text-white">{project.year}</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        <div className="mt-16 text-center md:hidden">
+          <Link to="/projects" className="btn btn-outline-light w-full justify-center">
+            View All Projects
+          </Link>
+        </div>
       </div>
     </section>
   );
-}
+};

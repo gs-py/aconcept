@@ -1,26 +1,21 @@
-import { LazyMotion, MotionConfig, domAnimation } from "framer-motion";
-import { HelmetProvider } from "react-helmet-async";
-import { BrowserRouter } from "react-router";
-import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
-import ScrollManager from "./components/layout/ScrollManager";
-import AnimatedRoutes from "./components/layout/PageTransition";
+import { BrowserRouter, Routes, Route } from "react-router";
+import { RootLayout } from "./layouts/RootLayout";
+import { Home } from "./pages/Home";
+import { Projects } from "./pages/Projects";
+import { ProjectDetail } from "./pages/ProjectDetail";
+import { Contact } from "./pages/Contact";
 
 export default function App() {
   return (
-    <HelmetProvider>
-      <LazyMotion features={domAnimation} strict>
-        <MotionConfig reducedMotion="user">
-          <BrowserRouter>
-            <ScrollManager />
-            <Navbar />
-            <main>
-              <AnimatedRoutes />
-            </main>
-            <Footer />
-          </BrowserRouter>
-        </MotionConfig>
-      </LazyMotion>
-    </HelmetProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<RootLayout />}>
+          <Route index element={<Home />} />
+          <Route path="projects" element={<Projects />} />
+          <Route path="projects/:id" element={<ProjectDetail />} />
+          <Route path="contact" element={<Contact />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
