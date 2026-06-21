@@ -1,8 +1,8 @@
 import { AnimatePresence, m, useReducedMotion } from "framer-motion";
 import { Route, Routes, useLocation } from "react-router";
 import type { ReactNode } from "react";
-import Home from "../../pages/Home";
-import Projects from "../../pages/Projects";
+import { Home } from "../../pages/Home";
+import { Projects } from "../../pages/Projects";
 import { EASE_OUT_EXPO } from "../../lib/motion";
 
 /** Smooth in-out sweep for the curtain slats. */
