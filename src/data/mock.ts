@@ -1,6 +1,6 @@
 export const PROJECTS = [
   {
-    id: "rajesh",
+    id: "01",
     title: "The Holistic Retreat",
     location: "Wayanad, Kerala",
     category: "Commercial property",
@@ -15,7 +15,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: "korome",
+    id: "02",
     title: "Resort at Korome",
     location: "Wayanad, Kerala",
     category: "Commercial property",
@@ -39,7 +39,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: "00",
+    id: "03",
     title: "Chettais Restaurant",
     location: "Mysuru, Karnataka",
     category: "Commercial property",
@@ -56,7 +56,7 @@ export const PROJECTS = [
     ]
   },
   {
-    id: "01",
+    id: "04",
     title: "Resort for Shanty",
     location: "Wayanad, Kerala",
     category: "Commercial property",
@@ -78,38 +78,6 @@ export const PROJECTS = [
       "/projects/shanty/6.jpeg",
       "/projects/shanty/7.jpeg"
     ]
-  },
-  {
-    id: "02",
-    title: "The Vertex House",
-    location: "Kochi, Kerala",
-    category: "Residential Architecture",
-    year: "2024",
-    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=2000&auto=format&fit=crop",
-  },
-  {
-    id: "02",
-    title: "Aura Boutique Hotel",
-    location: "Munnar, Kerala",
-    category: "Hospitality Design",
-    year: "2023",
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop",
-  },
-  {
-    id: "03",
-    title: "Lumina Workspace",
-    location: "Trivandrum, Kerala",
-    category: "Commercial Interior",
-    year: "2023",
-    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000&auto=format&fit=crop",
-  },
-  {
-    id: "04",
-    title: "Oasis Villa",
-    location: "Alappuzha, Kerala",
-    category: "Residential Interior",
-    year: "2022",
-    image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2000&auto=format&fit=crop",
   }
 ];
 
